@@ -13,9 +13,28 @@ Local network scan with NMAP
 To check the ports available in our network, lets spin our kali linux in our VMware. Lets open terminal and run ip a 
 ip a -> This command shows our ipaddress, where we now get the subnet and perform the nmap scan
 lets say my ip is 192.168.45.1 and my subnet will be 192.168.45.0/24
-<pre> \`\`\` # ip a output (redacted) 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever preferred_lft forever inet6 ::1/128 scope host noprefixroute valid_lft forever preferred_lft forever 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000 link/ether XX:XX:XX:XX:XX:XX brd ff:ff:ff:ff:ff:ff inet 192.168.XXX.XXX/24 brd 192.168.XXX.255 scope global dynamic noprefixroute eth0 valid_lft XXXXsec preferred_lft XXXXsec inet6 XXXX::XXXX:XXXX:XXXX:XXXX/64 scope link noprefixroute valid_lft forever preferred_lft forever \`\`\` </pre>
+
+<pre>
+# ip a output (redacted)
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether XX:XX:XX:XX:XX:XX brd ff:ff:ff:ff:ff:ff
+    inet 192.168.XXX.XXX/24 brd 192.168.XXX.255 scope global dynamic noprefixroute eth0
+       valid_lft XXXXsec preferred_lft XXXXsec
+    inet6 XXXX::XXXX:XXXX:XXXX:XXXX/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+</pre>
+
 Now run the nmap, here i am using nmap in terminal we can also use zenmap for the scans.
 nmap -sS 192.168.45.0/24 
+
 <pre>
 nmap -sS 192.168.178.0/24
 
@@ -77,12 +96,14 @@ Not shown: 1000 closed tcp ports (reset)
 Nmap done: 256 IP addresses (5 hosts up) scanned in 8.11 seconds
 </pre>
 
-** I have used metasploitable tool here for further understanding and exploitation **
-Note -  Metasploitable is vulnerable vitual machine designed for better understanding
+** I have used Metasploitable tool here for further understanding and exploitation **
+Note -  Metasploitable is a vulnerable virtual machine designed for better understanding
 
-Here my seaarch result showed all vulnerable ports in my network, but i know the ports but what versions the ports and using/following, is the vulnerability is already known, or is the vulnerability already patched. ushhh so many questions lets get ans to these with further scanning 
-Now let's get versions now, 
+Here my seaarch result showed all vulnerable ports in my network, but I know the ports, but what versions the ports using/following, is the vulnerability already known, or is the vulnerability already patched. ushhh so many questions lets get answers to these with further scanning 
+Now let's get versions now,
+
 <pre>
+nmap -sS -sV 192.168.xxx.xxx
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-08-04 08:25 EDT
 Nmap scan report for 192.168.XXX.XXX
 Host is up (0.0016s latency).
@@ -118,8 +139,15 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 11.82 seconds
 </pre>
 
-Now we know the vulnerable ports and protocols. Do you know the nmap also scans for vulnerabilities, as for the basic and all lets see with simple scan rather than NSE scripts for further deep analysis we can proceed with script scans 
+*Now as the nmap scan is done, we can check and get the information through wireshark too. Lets start the Wireshark scan and see how the network flows //Before getting into the Wireshark, the basic to know is OSI and TCP models, to get clear clarity on OSI model, [Visit my Cybersecurity Blog](https://wearejam.github.io/cyberjournallogs/)
+
+With the above scan we can see much data but the required ports can be filtered and highlighted according to out findings
+*
+
+Now we know the vulnerable ports and protocols. Do you know the nmap also scans for vulnerabilities (Aggressive scan), as for the basic and all lets see with simple scan rather than NSE scripts for further deep analysis we can proceed with script scans 
+Drawback - DETECTABLE 
 <pre>
+nmap -A -T4 192.168.xxx.xxx
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-08-04 08:28 EDT
 Nmap scan report for 192.168.XXX.XXX
 Host is up (0.0051s latency).
@@ -258,6 +286,4 @@ Do all domains respond YES
 Do all domains expose vulnerabilities? NO -> For every scan, we are burdening the server with N number of requests. The server might not respond quickly, and some of these requests may also be blocked by the firewall.
 Once the vulnerabilites are to be noted and saved as we dont know the firewall may block us for the next aggressive scan. // Yah happened to me // 
 
-WE HAVE THE TARGET NOW, WITH PORTS AND VULNERABLE SERVICES AND WITH THE AGGRESSIVE SCAN WE ALSO HAVE THE PATH TO ATTACK BUT DO WE KNOW HOW THE BACK SIGNALS RESPOND AND WHAT ALL THE PORTS/DATA BE EXPOSED WITH POWERFULL TOOL CALLED **WIRESHARK**
-
-
+WE HAVE THE TARGET NOW, WITH PORTS AND VULNERABLE SERVICES AND WITH THE AGGRESSIVE SCAN WE ALSO HAVE THE PATH TO ATTACK
