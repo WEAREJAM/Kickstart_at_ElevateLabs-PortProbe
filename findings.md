@@ -101,6 +101,7 @@ Nmap done: 256 IP addresses (5 hosts up) scanned in 8.11 seconds
 </pre>
 
 ** I have used Metasploitable tool here for further understanding and exploitation **
+
 Note -  Metasploitable is a vulnerable virtual machine designed for better understanding
 
 Here my seaarch result showed all vulnerable ports in my network, but I know the ports, but what versions the ports using/following, is the vulnerability already known, or is the vulnerability already patched. ushhh so many questions lets get answers to these with further scanning 
@@ -148,12 +149,16 @@ Now as the nmap scan is done, we can check and get the information through wires
 With the above scan we can see much data but the required ports can be filtered and highlighted according to our findings, Here i have filtered TCP packets
 As we performed syn scan, we are performing only half handshake mean while tcp scan -sT does full handshake and burdens the server.
 In this sync scan host sends SYN flag, if the port open the server sends SYN/ACK and later the host closes with RST flag which drops the handshake. LESS NOISE
+
 ![Port Probe Result](https://github.com/WEAREJAM/Kickstart_at_ElevateLabs-PortProbe/blob/main/asserts/sample2.png?raw=true)
+
 ![Port Probe Result](https://github.com/WEAREJAM/Kickstart_at_ElevateLabs-PortProbe/blob/main/asserts/sample3.png?raw=true)
-The above Wireshark result shows how the flags are communicating - the best way to escape a noisy TCP 3-way handshake. **May ways to bypass just KNOW THE USAGE
-**
+
+The above Wireshark result shows how the flags are communicating - the best way to escape a noisy TCP 3-way handshake. May ways to bypass just KNOW THE USAGE
+
 Now we know the vulnerable ports and protocols. Do you know the nmap also scans for vulnerabilities (Aggressive scan), as for the basic and all lets see with simple scan rather than NSE scripts for further deep analysis we can proceed with script scans 
 Drawback - DETECTABLE 
+
 <pre>
 nmap -A -T4 192.168.xxx.xxx
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-08-04 08:28 EDT
@@ -294,4 +299,8 @@ Do all domains respond YES
 Do all domains expose vulnerabilities? NO -> For every scan, we are burdening the server with N number of requests. The server might not respond quickly, and some of these requests may also be blocked by the firewall.
 Once the vulnerabilites are to be noted and saved as we dont know the firewall may block us for the next aggressive scan. // Yah happened to me // 
 
-WE HAVE THE TARGET NOW, WITH PORTS AND VULNERABLE SERVICES AND WITH THE AGGRESSIVE SCAN WE ALSO HAVE THE PATH TO ATTACK
+WE HAVE THE TARGET NOW, WITH PORTS AND VULNERABLE SERVICES AND WITH THE AGGRESSIVE SCAN WE ALSO HAVE THE PATH TO ATTACK 
+
+LET'S PROCEED FURTHER ON HOW TO EXPLOIT THE PORTS ........ >< ........ 
+
+___Jamming With Jam____
