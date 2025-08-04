@@ -1,11 +1,14 @@
 This is the basic task of checking our local network for vulnerable ports. The ports are the most searched and most found vulnerabilities if they are not secured. 
 
 There are 65535 ports. 
+
 Well-Known Ports - 0 to 1023
+
 Registered Ports - 1024 to 49151
+
 Private Ports - 49152 to 65535
 
-#Tools Usage 
+Tool Usage 
 Nmap is a powerful tool used for network discovery and security auditing. It detects open ports, services, OS versions, IP addresses, and can perform vulnerability scans using NSE scripts.
 
 Task 1:
@@ -15,7 +18,7 @@ ip a -> This command shows our ipaddress, where we now get the subnet and perfor
 lets say my ip is 192.168.45.1 and my subnet will be 192.168.45.0/24
 
 <pre>
-# ip a output (redacted)
+ip a
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
