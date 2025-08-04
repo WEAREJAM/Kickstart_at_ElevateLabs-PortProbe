@@ -143,14 +143,15 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 11.82 seconds
 </pre>
 
-*Now as the nmap scan is done, we can check and get the information through wireshark too. Lets start the Wireshark scan and see how the network flows //Before getting into the Wireshark, the basic to know is OSI and TCP models, to get clear clarity on OSI model, [Visit my Cybersecurity Blog](https://wearejam.github.io/cyberjournallogs/)
+Now as the nmap scan is done, we can check and get the information through wireshark too. Lets start the Wireshark scan and see how the network flows //Before getting into the Wireshark, the basic to know is OSI and TCP models, to get clear clarity on OSI model, [Visit my Cybersecurity Blog](https://wearejam.github.io/cyberjournallogs/)
 
 With the above scan we can see much data but the required ports can be filtered and highlighted according to our findings, Here i have filtered TCP packets
 As we performed syn scan, we are performing only half handshake mean while tcp scan -sT does full handshake and burdens the server.
 In this sync scan host sends SYN flag, if the port open the server sends SYN/ACK and later the host closes with RST flag which drops the handshake. LESS NOISE
 ![Port Probe Result](https://github.com/WEAREJAM/Kickstart_at_ElevateLabs-PortProbe/blob/main/asserts/sample2.png?raw=true)
-*
-
+![Port Probe Result](https://github.com/WEAREJAM/Kickstart_at_ElevateLabs-PortProbe/blob/main/asserts/sample3.png?raw=true)
+The above Wireshark result shows how the flags are communicating - the best way to escape a noisy TCP 3-way handshake. **May ways to bypass just KNOW THE USAGE
+**
 Now we know the vulnerable ports and protocols. Do you know the nmap also scans for vulnerabilities (Aggressive scan), as for the basic and all lets see with simple scan rather than NSE scripts for further deep analysis we can proceed with script scans 
 Drawback - DETECTABLE 
 <pre>
