@@ -13,7 +13,8 @@ Nmap is a powerful tool used for network discovery and security auditing. It det
 
 Task 1:
 Local network scan with NMAP
-To check the ports available in our network, lets spin our kali linux in our VMware. Lets open terminal and run ip a 
+To check the ports available in our network, lets spin our kali linux in our VMware. Lets open terminal and run ip a.
+
 ip a -> This command shows our ipaddress, where we now get the subnet and perform the nmap scan
 lets say my ip is 192.168.45.1 and my subnet will be 192.168.45.0/24
 
